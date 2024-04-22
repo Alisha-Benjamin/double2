@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .footer { margin-top: 20px; }
+        .like-button { cursor: pointer; }
+        .liked { color: red; }
+    </style>
+</head>
+<body>
+
+<div id="photo">
+    <img src="example.jpg" alt="A beautiful scenery" width="300">
+    <div>
+        <span id="likeButton" class="like-button">❤</span>
+        <span id="likeCounter">0</span> Likes
+    </div>
+    <div>
+        <label for="commentInput">Add a comment:</label>
+        <input type="text" id="commentInput" placeholder="Type here...">
+        <button onclick="addComment()">Post</button>
+    </div>
+    Comments:
+    <ul id="commentsList"></ul>
+</div>
+
+<div class="footer">
+    © 2023 Your Social Media Name. Follow us on 
+    <a href="https://twitter.com">Twitter</a>, 
+    <a href="https://instagram.com">Instagram</a>.
+</div>
+
+<script>
+    let likes = 0;
+    let liked = false;
+    const likeButton = document.getElementById('likeButton');
+    const likeCounter = document.getElementById('likeCounter');
+
+    likeButton.addEventListener('click', () => {
+        liked = !liked;
+        likeButton.classList.toggle('liked', liked);
+        likes += liked ? 1 : -1;
+        likeCounter.textContent = likes;
+    });
+
+    function addComment() {
+        const comment = document.getElementById('commentInput').value;
+        const commentsList = document.getElementById('commentsList');
+        if (comment.trim() !== '') {
+            const listItem = document.createElement('li');
+            listItem.textContent = comment;
+            commentsList.appendChild(listItem);
+            document.getElementById('commentInput').value = ""; // Clear input field
+        }
+    }
+</script>
+
+</body>
+</html>
